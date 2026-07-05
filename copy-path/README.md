@@ -8,6 +8,14 @@
 
 在 Finder 中右键文件/文件夹 → **服务** → **Copy Path**，将 POSIX 路径复制到剪贴板（多文件用换行分隔）。
 
+## 安装
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/xiaodi0003/mac-tools/main/copy-path/install.sh | bash
+```
+
+---
+
 ## 文件结构
 
 ```
