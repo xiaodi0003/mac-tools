@@ -13,6 +13,12 @@ macOS 状态栏电源功率监控工具 + CLI 命令行工具。
 sh install.sh
 ```
 
+或一键远程安装：
+
+```bash
+zsh <(curl -L https://raw.githubusercontent.com/xiaodi0003/mac-tools/main/power-in-bar/install.sh)
+```
+
 会自动：
 1. 安装 `power` CLI 到 `/usr/local/bin`
 2. 编译并安装 `PowerMonitor.app` 到 `/Applications`
