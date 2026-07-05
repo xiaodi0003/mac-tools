@@ -71,7 +71,7 @@ resources_dir = os.path.join(contents_dir, "Resources")
 COMMAND_STRING = (
     'for f in "$@"; do '
     'd="$(printf "%q" "$f")"; '
-    'osascript -e "tell application \\"Terminal\\" to do script \\"cd $d && exec bash -l -c opencode\\""; '
+    'osascript -e "tell application \\"Terminal\\" to do script \\"cd $d && exec zsh -l -c opencode\\""; '
     'done; '
     'osascript -e "tell application \\"Terminal\\" to activate"'
 )
@@ -81,7 +81,7 @@ SOURCE = (
     'export LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8\n'
     'for f in "$@"; do\n'
     '    d="$(printf "%q" "$f")"\n'
-    '    osascript -e "tell application \\"Terminal\\" to do script \\"cd $d && exec bash -l -c opencode\\""\n'
+    '    osascript -e "tell application \\"Terminal\\" to do script \\"cd $d && exec zsh -l -c opencode\\""\n'
     'done\n'
     'osascript -e "tell application \\"Terminal\\" to activate"'
 )
@@ -210,6 +210,18 @@ if [ -x /System/Library/CoreServices/pbs ]; then
 fi
 
 killall Finder 2>/dev/null || true
+
+# ===================== 配置 ~/.opencode/bin 到 PATH =====================
+
+ZSENV="$HOME/.zshenv"
+LINE='export PATH="$HOME/.opencode/bin:$PATH"'
+
+if ! grep -qF "$LINE" "$ZSENV" 2>/dev/null; then
+    echo "$LINE" >> "$ZSENV"
+    echo "  [+] Added opencode to PATH in ~/.zshenv"
+else
+    echo "  [+] opencode already in PATH (~/.zshenv), skipped"
+fi
 
 echo ""
 echo "  Done! 右键 Finder 中的文件夹 → 服务 → OpenCode"

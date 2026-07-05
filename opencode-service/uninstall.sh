@@ -17,5 +17,16 @@ fi
 # 重启 Finder 使其重新加载服务列表
 killall Finder 2>/dev/null || true
 
+# ===================== 清理 ~/.zshenv 中的 PATH =====================
+
+ZSENV="$HOME/.zshenv"
+LINE='export PATH="$HOME/.opencode/bin:$PATH"'
+if grep -qF "$LINE" "$ZSENV" 2>/dev/null; then
+    grep -vF "$LINE" "$ZSENV" > "${ZSENV}.tmp" && mv "${ZSENV}.tmp" "$ZSENV"
+    echo "  [+] Removed opencode PATH from ~/.zshenv"
+else
+    echo "  [+] opencode PATH not found in ~/.zshenv, skipped"
+fi
+
 echo ""
 echo "  Done! 'OpenCode' service has been uninstalled."
