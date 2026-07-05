@@ -162,9 +162,9 @@ class PowerMonitor: ObservableObject {
 struct PowerLabelView: View {
     @ObservedObject var monitor: PowerMonitor
     var body: some View {
-        let icon = monitor.batDirection == "⚡" ? "bolt.fill" :
-                   monitor.batDirection == "🔋" ? "battery.25" : "bolt"
-        Label("\(monitor.sysPower, specifier: "%.1f")W", systemImage: icon)
+        let arrow = monitor.batDirection == "⚡" ? "↓" :
+                    monitor.batDirection == "🔋" ? "↑" : "–"
+        Text("\(arrow)\(monitor.sysPower, specifier: "%.1f")W")
             .task { monitor.start() }
     }
 }
@@ -230,6 +230,16 @@ echo "done."
 
 echo "==> Launching ${APP_NAME}.app ..."
 open "$APP_DIR"
+
+echo "==> Adding to Login Items ..."
+osascript -e "
+tell application \"System Events\"
+    set existing to every login item whose path is \"$APP_DIR\"
+    if existing is {} then
+        make login item at end with properties {path:\"$APP_DIR\", hidden:false}
+    end if
+end tell
+" 2>/dev/null && echo "    Done." || echo "    (skipped)"
 
 rm -rf "$SWIFT_SRC"
 echo ""

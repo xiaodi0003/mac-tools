@@ -1,6 +1,16 @@
 #!/bin/bash
 set -euo pipefail
 
+echo "==> Removing Login Item ..."
+osascript -e "
+tell application \"System Events\"
+    set loginItems to every login item whose path is \"/Applications/PowerMonitor.app\"
+    repeat with item in loginItems
+        delete item
+    end repeat
+end tell
+" 2>/dev/null && echo "    Done." || echo "    (none)"
+
 echo "==> Stopping PowerMonitor ..."
 killall PowerMonitor 2>/dev/null || echo "    (not running)"
 
