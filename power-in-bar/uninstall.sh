@@ -20,4 +20,10 @@ rm -rf /Applications/PowerMonitor.app
 echo "==> Removing /usr/local/bin/power ..."
 rm -f /usr/local/bin/power
 
+echo "==> Removing /usr/local/bin/powermetrics-reader ..."
+rm -f /usr/local/bin/powermetrics-reader
+
+echo "==> Removing sudoers rule ..."
+sudo rm -f /etc/sudoers.d/powermetrics 2>/dev/null || true
+
 echo "✅ Uninstalled."
