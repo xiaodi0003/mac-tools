@@ -7,6 +7,7 @@ APP_DIR="/Applications/${APP_NAME}.app"
 SWIFT_SRC="/tmp/${APP_NAME}-build"
 
 echo "==> Installing power CLI to /usr/local/bin ..."
+mkdir -p /usr/local/bin
 cat > /usr/local/bin/power << 'POWER_SCRIPT'
 #!/bin/bash
 # power - 系统状态监控 CLI (macOS)
