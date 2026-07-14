@@ -11,7 +11,7 @@
 ## 安装
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/xiaodi0003/mac-tools/main/copy-path/install.sh | bash
+curl -fsSL https://gitee.com/tzy233/mac-tools/raw/main/copy-path/install.sh | bash
 ```
 
 ---
